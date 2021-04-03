@@ -35,6 +35,9 @@ export const handleGrantDone = (event) => {
   const scripts = event.detail
   setConsentCookie(scripts)
 
+  const doneEvent = new CustomEvent("consent-grant-done", {detail: event.detail});
+  window.dispatchEvent(doneEvent);
+
   scripts.forEach((s) => {
     setBinaryConsentCookie(s.gtm.grantEvent, !!s.granted)
     if (s.granted) {
